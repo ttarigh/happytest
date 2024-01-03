@@ -8,13 +8,29 @@ Promise.all([
 ]).then(startVideo);
 
 function startVideo() {
-  navigator.getUserMedia(
-    { video: {} },
+  const getUserMedia =
+    navigator.mediaDevices.getUserMedia ||
+    navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia;
+
+  if (!getUserMedia) {
+    console.error("getUserMedia is not supported in this browser");
+    return;
+  }
+
+  getUserMedia.call(
+    navigator,
+    { video: true },
     (stream) => {
       video.srcObject = stream;
-      // video.style.display = 'none'; // Hide the video initially
+      video
+        .play()
+        .catch((error) => console.error("Error playing video:", error));
     },
-    (err) => console.error(err)
+    (error) => {
+      console.error("Error accessing the camera:", error);
+    }
   );
 }
 
