@@ -12,7 +12,7 @@ function startVideo() {
     { video: {} },
     stream => {
       video.srcObject = stream;
-      video.style.display = 'none'; // Hide the video initially
+      // video.style.display = 'none'; // Hide the video initially
     },
     err => console.error(err)
   );
@@ -49,7 +49,7 @@ video.addEventListener('play', () => {
         window.location.href = 'https://www.tina.zone';
       } else {
         // Toggle the visibility of the video based on happiness detection
-        video.style.display = 'none';
+        // video.style.display = 'none';
       }
     }
 
