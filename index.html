@@ -43,13 +43,13 @@
   <video id="video" width="600" height="450" autoplay></video>
 
   <script>
-    const video = document.getElementById('video');
+    const video1 = document.getElementById('video');
     const additionalMessage = document.getElementById('additionalMessage');
 
     navigator.mediaDevices.getUserMedia({ video: true })
       .then((stream) => {
-        video.srcObject = stream;
-        video.play();
+        video1.srcObject = stream;
+        video1.play();
         additionalMessage.style.opacity = '1';
       })
       .catch((error) => {
