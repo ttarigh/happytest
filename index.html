@@ -38,16 +38,23 @@
 </head>
 
 <body>
-  <div id="message">only happy users can visit tina.zone!</div>
-  <div id="additionalMessage">you have to smile!</div>
+  <div id="message">Only happy users can visit tina.zone!</div>
+  <div id="additionalMessage">You have to smile!</div>
   <video id="video" width="600" height="450" autoplay></video>
 
   <script>
-    // Add a timeout to display the additional message after 2 seconds
-    setTimeout(() => {
-      const additionalMessage = document.getElementById('additionalMessage');
-      additionalMessage.style.opacity = '1';
-    }, 1000);
+    const video1 = document.getElementById('video');
+    const additionalMessage = document.getElementById('additionalMessage');
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        video1.srcObject = stream;
+        video1.play();
+        additionalMessage.style.opacity = '1';
+      })
+      .catch((error) => {
+        console.error('Error accessing the camera:', error);
+      });
   </script>
 </body>
 
