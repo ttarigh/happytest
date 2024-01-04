@@ -1,61 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Smile to Pass</title>
+    <script defer src="face-api.min.js"></script>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column;
+        background-color: rgb(255, 239, 22);
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Smile to Pass</title>
-  <script defer src="face-api.min.js"></script>
-  <script defer src="script.js"></script>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      flex-direction: column;
-    }
+      #message {
+        font-size: 50px;
+        font-family: "Helvetica", sans-serif;
+        margin: 10px;
+      }
+      #currentEmotionMessage {
+        font-size: 24px;
+        text-align: center;
+        margin: 10px;
+        font-family: 'Helvetica', sans-serif; 
+      }
+      #currentEmotion {
+        border: 2px solid red;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-family: "Helvetica", sans-serif;
+      }
+      #additionalMessage {
+        font-size: 18px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        font-family: "Helvetica", sans-serif;
+      }
+      #reload {
+        font-family: "Helvetica", sans-serif;
+        display: none;
+      }
+      #video {
+        display: none;
+      }
+    </style>
+  </head>
 
-    #message {
-      font-size: 24px;
-      text-align: center;
-    }
+  <body id="background">
+    <div id="message">Only happy users can visit tina.zone!</div>
+    <div id="additionalMessage">You must smile to enter.</div>
+    <div id="currentEmotionMessage">
+      Your current emotion is: <span id="currentEmotion"></span>
+    </div>
+    <div id="reload">REDIRECTING...</div>
 
-    #additionalMessage {
-      font-size: 18px;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
+    <video id="video" width="600" height="450" autoplay></video>
 
-    #video {
-      display: none;
-    }
-  </style>
-</head>
+    <script>
+      const video1 = document.getElementById("video");
+      const additionalMessage = document.getElementById("additionalMessage");
 
-<body>
-  <div id="message">Only happy users can visit tina.zone!</div>
-  <div id="additionalMessage">You have to smile!</div>
-  <video id="video" width="600" height="450" autoplay></video>
-
-  <script>
-    const video1 = document.getElementById('video');
-    const additionalMessage = document.getElementById('additionalMessage');
-
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then((stream) => {
-        video1.srcObject = stream;
-        video1.play();
-        additionalMessage.style.opacity = '1';
-      })
-      .catch((error) => {
-        console.error('Error accessing the camera:', error);
-      });
-  </script>
-</body>
-
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          video1.srcObject = stream;
+          video1.play();
+          additionalMessage.style.opacity = "1";
+        })
+        .catch((error) => {
+          console.error("Error accessing the camera:", error);
+        });
+    </script>
+  </body>
 </html>
